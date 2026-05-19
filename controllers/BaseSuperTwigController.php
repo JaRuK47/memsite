@@ -4,11 +4,10 @@ class BaseSuperTwigController extends TwigBaseController {
     public function getContext(): array
     {
         $context = parent::getContext();
-
-        $query = $this->pdo->query("SELECT name as type FROM types ORDER BY 1");
+        $query = $this->pdo->query("SELECT id, name FROM types ORDER BY name");
         $types = $query->fetchAll();
         $context['types'] = $types;
-        $context['history'] = $_SESSION['history'];
+        $context['history'] = $_SESSION['history'] ?? [];
 
         return $context;
     }

@@ -4,7 +4,7 @@
 <h1>Редактирование персонажа</h1>
 <hr>
 
-<form action="" enctype="multipart/form-data" method="POST" class="row g-3">
+<form method="POST" enctype="multipart/form-data" class="row g-3">
     <div class="col-4">
         <label class="form-label">Название</label>
         <input type="text" class="form-control" name="title" value="{{ object.title }}" required>
@@ -17,26 +17,19 @@
         <label class="form-label">Тип</label>
         <select class="form-control" name="type" required>
             {% for type in type_options %}
-                <option value="{{ type.name }}" {% if object.type == type.name %}selected{% endif %}>
-                    {{ type.name }}
-                </option>
+                <option value="{{ type.id }}" {% if object.type == type.id %}selected{% endif %}>{{ type.name }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="mb-3">
         <label class="form-label">Текущая картинка</label><br>
-        {% if object.image %}
-            <img src="{{ object.image }}" style="height: 100px;">
-        {% else %}
-            <p>Нет картинки</p>
-        {% endif %}
+        <img src="{{ object.image }}" style="height: 100px;">
     </div>
     <div class="mb-3">
         <label class="form-label">Новая картинка (оставьте пустым, чтобы не менять)</label>
-        <input class="form-control" type="file" name="image">
+        <input type="file" class="form-control" name="image">
     </div>
     <div class="col-12">
-        <label class="form-label">Полное описание</label>
         <textarea name="info" class="form-control" rows="5">{{ object.info }}</textarea>
     </div>
     <div class="col-12 text-end">
