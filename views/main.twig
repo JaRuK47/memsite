@@ -1,0 +1,70 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+<br>
+<style>
+    .character-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    
+    .character-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .character-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .character-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .character-name {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    
+    .character-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .character-buttons .btn {
+        width: 100%;
+    }
+</style>
+
+<div class="character-grid">
+    {% for object in superhero %}
+        {% include 'character_card.twig' with {
+            'character': {
+                'name': object.title,
+                'id': object.id, 
+                'image': object.image
+            }
+        } %}
+    {% endfor %}
+</div>
+{% endblock %}

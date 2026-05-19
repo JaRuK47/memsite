@@ -1,0 +1,23 @@
+{% from "macros/buttons.twig" import btn %}
+
+<div class="character-card position-relative">
+    <div class="position-absolute" style="right: 10px; top: 10px;">
+        <a href="/superhero/{{ character.id }}/edit" class="btn btn-warning btn-sm me-1">
+            <i class="fas fa-edit"></i>
+        </a>
+        <form action="/superhero/delete" method="POST">
+            <input type="hidden" name="id" value="{{ object.id }}">
+            <button type="submit" class="btn btn-danger btn-sm">
+                <i class="fas fa-times"></i>
+            </button>
+        </form>
+    </div>
+    
+    <img src="{{ character.image }}" alt="{{ character.name }}" class="character-image">
+    <div class="character-name">{{ character.name }}</div>
+    <div class="character-buttons">
+        {{ btn(character.name, '/superhero/' ~ character.id, true, 'primary') }}
+        {{ btn('Картинка', '/superhero/' ~ character.id ~ '?show=image', false) }}
+        {{ btn('Описание', '/superhero/' ~ character.id ~ '?show=info', false) }}
+    </div>
+</div>

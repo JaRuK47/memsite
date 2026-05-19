@@ -1,0 +1,21 @@
+{% extends "__layout.twig" %}
+
+{% from "macros/buttons.twig" import btn %}
+
+{% block content %}
+<br>
+{% if is_image %}
+<div class="text-center">
+    <img src="{{ image }}" alt="{{ title }}" class="img-fluid" style="max-width: 600px;">
+</div>
+<br>
+<div class="text-center">
+    {{ btn('Назад', base_url, false) }}
+    {{ btn('На главную', '/', false) }}
+</div>
+{% else %}
+<div class="alert alert-warning">
+    Изображение не найдено
+</div>
+{% endif %}
+{% endblock %}

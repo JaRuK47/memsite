@@ -1,0 +1,21 @@
+{% extends "__layout.twig" %}
+
+{% from "macros/buttons.twig" import btn %}
+
+{% block content %}
+<br>
+{% if is_info %}
+<div class="card">
+    <div class="card-body">
+        <p>{{ info }}</p>
+    </div>
+</div>
+<br>
+{{ btn('Назад', base_url, false) }}
+{{ btn('На главную', '/', false) }}
+{% else %}
+<div class="alert alert-warning">
+    Информация не найдена
+</div>
+{% endif %}
+{% endblock %}

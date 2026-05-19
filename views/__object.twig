@@ -1,0 +1,31 @@
+{% extends "__layout.twig" %}
+
+{% import "macros/buttons.twig" as buttons %}
+
+{% block content %}
+
+Сообщение из сессии: {{my_session_message}}
+<br>
+Последние сообщения:<br>
+{% for m in messages %}
+    {{m}}<br>
+{% endfor %}
+<hr>
+
+<div>
+    <h2>{{ title }}</h2>
+    <p>{{ description }}</p>
+</div>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        {{ buttons.btn('Картинка', base_url ~ '?show=image', false) }}
+    </li>
+    <li class="nav-item">
+        {{ buttons.btn('Описание', base_url ~ '?show=info', false) }}
+    </li>
+</ul>
+
+{% block objectContent %}
+{% endblock %}
+{% endblock %}

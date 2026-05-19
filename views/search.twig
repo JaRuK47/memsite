@@ -1,0 +1,67 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+<h2 class="mb-4">Поиск</h2>
+
+<form action="" method="GET">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ search_title }}" placeholder="Введите название...">
+        </div>
+        
+        <div class="col-md-6">
+            <label for="description" class="form-label">Описание</label>
+            <input type="text" class="form-control" id="description" name="description" value="{{ search_description }}" placeholder="Введите ключевые слова...">
+        </div>
+        
+        <div class="col-md-4">
+            <label for="type" class="form-label">Тип</label>
+            <select class="form-select" id="type" name="type">
+                <option value="all" {% if selected_type == 'all' %}selected{% endif %}>Все</option>
+                {% for type in type_options %}
+                    <option value="{{ type.name }}" {% if selected_type == type.name %}selected{% endif %}>
+                        {{ type.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                Найти
+            </button>
+            <a href="/search" class="btn btn-secondary">
+                Сбросить
+            </a>
+        </div>
+    </div>
+</form>
+
+<hr>
+
+<h3 class="mt-4">Результаты поиска <span class="badge bg-primary">{{ objects|length }}</span></h3>
+
+{% if objects|length > 0 %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
+        {% for object in objects %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ object.title }}
+                        </h5>
+                        <a href="/superhero/{{ object.id }}" class="btn btn-outline-primary btn-sm mt-2">
+                            Подробнее 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info mt-3">
+        <i class="fas fa-info-circle"></i> Ничего не найдено. Попробуйте изменить параметры поиска.
+    </div>
+{% endif %}
+{% endblock %}

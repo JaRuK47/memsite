@@ -1,0 +1,47 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+<h1>Редактирование персонажа</h1>
+<hr>
+
+<form action="" enctype="multipart/form-data" method="POST" class="row g-3">
+    <div class="col-4">
+        <label class="form-label">Название</label>
+        <input type="text" class="form-control" name="title" value="{{ object.title }}" required>
+    </div>
+    <div class="col-4">
+        <label class="form-label">Краткое описание</label>
+        <input type="text" class="form-control" name="description" value="{{ object.description }}" required>
+    </div>
+    <div class="col-4">
+        <label class="form-label">Тип</label>
+        <select class="form-control" name="type" required>
+            {% for type in type_options %}
+                <option value="{{ type.name }}" {% if object.type == type.name %}selected{% endif %}>
+                    {{ type.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Текущая картинка</label><br>
+        {% if object.image %}
+            <img src="{{ object.image }}" style="height: 100px;">
+        {% else %}
+            <p>Нет картинки</p>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Новая картинка (оставьте пустым, чтобы не менять)</label>
+        <input class="form-control" type="file" name="image">
+    </div>
+    <div class="col-12">
+        <label class="form-label">Полное описание</label>
+        <textarea name="info" class="form-control" rows="5">{{ object.info }}</textarea>
+    </div>
+    <div class="col-12 text-end">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="/superhero/{{ object.id }}" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>
+{% endblock %}
