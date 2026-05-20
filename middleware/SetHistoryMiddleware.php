@@ -2,7 +2,7 @@
 
 class SetHistoryMiddleware extends BaseMiddleware {
     public function apply(BaseController $controller, array $context) {
-        $currentUrl = $_SERVER['REQUEST_URI'];
+        $currentUrl = urldecode($_SERVER['REQUEST_URI']);;
         
         $pageTitle = $controller->title ?? 'Страница';
         
